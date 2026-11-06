@@ -20,8 +20,8 @@ from typing import Any, Callable
 PRICING_1M_TOKENS = {
     "gpt-4o": {"input": 5.00, "output": 20.00},
     "gpt-4o-mini": {"input": 0.150, "output": 0.600},
-    "gemini-2.5-flash": {"input": 0.075, "output": 0.300},
-    "gemini-2.5-pro": {"input": 1.25, "output": 5.00},
+    "gemini-3.5-flash": {"input": 0.075, "output": 0.300},
+    "gemini-3.8-flash": {"input": 1.25, "output": 5.00},
     "claude-3-5-sonnet": {"input": 3.00, "output": 15.00},
     "claude-3-5-haiku": {"input": 0.80, "output": 4.00},
 }
@@ -29,7 +29,7 @@ PRICING_1M_TOKENS = {
 # Standard Model Identifiers
 OPENAI_MODEL = "gpt-4o"
 OPENAI_MINI_MODEL = "gpt-4o-mini"
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-3.5-flash"
 ANTHROPIC_MODEL = "claude-3-5-haiku"
 
 
@@ -300,6 +300,8 @@ def streaming_chatbot() -> None:
                 response_stream = client.models.generate_content_stream(
                     model=GEMINI_MODEL,
                     contents=formatted_contents
+
+
                 )
                 for chunk in response_stream:
                     chunk_text = chunk.text or ""
@@ -440,8 +442,6 @@ def format_comparison_table(results: list[dict]) -> str:
             )
             
     return "\n".join(table_lines)
-
-
 
 # ---------------------------------------------------------------------------
 # Entry point for manual testing
